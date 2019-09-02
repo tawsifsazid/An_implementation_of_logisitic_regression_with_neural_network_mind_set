@@ -13,6 +13,10 @@ import sklearn.datasets
 import sklearn.linear_model
 from sklearn.model_selection import train_test_split
 
+def relu(Z):
+    
+    return np.maximum(0, Z)
+
 def sigmoid(Z):
     
     Z = 1 / (1 + np.exp(-Z))
