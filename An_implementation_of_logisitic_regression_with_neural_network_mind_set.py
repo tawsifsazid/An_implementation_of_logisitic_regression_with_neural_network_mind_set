@@ -4,7 +4,7 @@ Created on Sun Sep  1 00:56:35 2019
 
 @author: sazid
 """
-
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -33,7 +33,7 @@ def propagate( w, b, X, Y):
     #print(Z.shape)
     #print(Z)
     
-    A = sigmoid(Z)
+    A = relu(Z)
     #print('A shape = ' + str(A.shape))
     #print('Y shape' + str(Y.shape))
     #print(A)
@@ -98,14 +98,23 @@ def optimize(w, b, X, Y, iteration, learning_rate, print_cost = False):
     
 def initialize_parameters(dim):
     
-    w = np.random.randn(dim, 1)*0.01
+    #normal Init
+    #w = np.random.randn(dim, 1)*0.01
     #print(W.shape)
     #print(W)
     
-    b = 0 
+    #b = 0 
     #b = np.zeros((1,1))
     #print(b.shape)
     #print(b)
+    
+    # HE initialization
+    #w = np.random.randn(dim , 1)*np.sqrt(2/960)
+    #b = 0
+    
+    #Xavier initialization
+    w = np.random.randn(dim , 1)*np.sqrt(1/960)
+    b = 0
     
     assert(w.shape == (dim, 1))
     assert(isinstance(b, float) or isinstance(b, int))
@@ -121,7 +130,7 @@ def predict( w, b, X):
     Z = np.dot( w.T, X)
     #print("Z shape predict = " + str(Z.shape))
      
-    A = sigmoid(Z)
+    A = relu(Z)
     #print("A shape" + str(A.shape))
     
     for i in range(A.shape[1]):
@@ -173,7 +182,7 @@ def NN_model_zero(X_train, Y_train, X_test, Y_test, iteration, learning_rate):
 
 def data_input_and_process_function():
     
-     a = np.loadtxt("C:\\Users\\sazid\\Desktop\\data_banknote_authentication.txt",delimiter=',')
+     a = np.loadtxt("/kaggle/input/data_banknote_authentication.txt",delimiter=',')
      #print(a.shape)
      #print(a)
      
@@ -204,12 +213,20 @@ def data_input_and_process_function():
      #print(train_set_Y.shape)
      #print(test_set_Y.shape)
      
+     #Normalize
+     train_set_X = train_set_X - np.mean(train_set_X)
+     train_set_X = train_set_X / np.std(train_set_X)
+     
+     test_set_X = test_set_X - np.mean(test_set_X)
+     test_set_X = test_set_X / np.std(test_set_X)
+        
      return train_set_X, test_set_X, train_set_Y, test_set_Y
     
 def main_func_call():
     
     train_set_X, test_set_X, train_set_Y, test_set_Y = data_input_and_process_function()
-    d = NN_model_zero(train_set_X, train_set_Y, test_set_X, test_set_Y, iteration = 2000, learning_rate = 0.001)
+    d = NN_model_zero(train_set_X, train_set_Y, test_set_X, test_set_Y, iteration = 9500, learning_rate = 0.001)
 
 
 main_func_call()    
+
