@@ -62,7 +62,7 @@ def propagate( w, b, X, Y):
     
     return grads, cost
 
-def optimize(w, b, X, Y, iteration, learning_rate, print_cost = False):
+def optimize(w, b, X, Y, iteration, learning_rate, print_cost = True):
     
     costs = []
     
@@ -99,11 +99,11 @@ def optimize(w, b, X, Y, iteration, learning_rate, print_cost = False):
 def initialize_parameters(dim):
     
     #normal Init
-    #w = np.random.randn(dim, 1)*0.01
+    w = np.random.randn(dim, 1)*0.01
     #print(W.shape)
     #print(W)
     
-    #b = 0 
+    b = 0 
     #b = np.zeros((1,1))
     #print(b.shape)
     #print(b)
@@ -155,7 +155,7 @@ def NN_model_zero(X_train, Y_train, X_test, Y_test, iteration, learning_rate):
     #print(w.shape)
     #print(b.shape)
     
-    parameters, grads, costs = optimize(w, b, X_train, Y_train, iteration, learning_rate, print_cost = False)
+    parameters, grads, costs = optimize(w, b, X_train, Y_train, iteration, learning_rate, print_cost = True)
     
     w = parameters["w"]
     b = parameters["b"]
@@ -226,7 +226,14 @@ def main_func_call():
     
     train_set_X, test_set_X, train_set_Y, test_set_Y = data_input_and_process_function()
     d = NN_model_zero(train_set_X, train_set_Y, test_set_X, test_set_Y, iteration = 9500, learning_rate = 0.001)
-
+    
+    costs = np.squeeze(d['costs'])
+    
+    plt.plot(costs)
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per hundreds)')
+    plt.title("Learning rate =" + str(d["learning_rate"]))
+    plt.show()
 
 main_func_call()    
 
