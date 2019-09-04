@@ -99,11 +99,11 @@ def optimize(w, b, X, Y, iteration, learning_rate, print_cost = True):
 def initialize_parameters(dim):
     
     #normal Init
-    w = np.random.randn(dim, 1)*0.01
+    #w = np.random.randn(dim, 1)*0.01
     #print(W.shape)
     #print(W)
     
-    b = 0 
+    #b = 0 
     #b = np.zeros((1,1))
     #print(b.shape)
     #print(b)
