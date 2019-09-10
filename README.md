@@ -3,5 +3,5 @@ Implementation of Logistic  Regression for getting intuition : how neural networ
 
 Data Set: http://archive.ics.uci.edu/ml/datasets/banknote+authentication
 
-Activation Function: sigmoid
+Activation Function: Relu / Sigmoid
 
