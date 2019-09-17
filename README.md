@@ -3,5 +3,7 @@ Implementation of Logistic  Regression for getting intuition : how neural networ
 
 Data Set: http://archive.ics.uci.edu/ml/datasets/banknote+authentication
 
+Kernel link: https://www.kaggle.com/tawsifsazid/logistic-regression-with-neural-network-mindset
+
 Activation Function: Relu / Sigmoid
 
